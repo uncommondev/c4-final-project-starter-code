@@ -120,12 +120,12 @@ export class TodosAccess {
         logger.info('generateUploadUrl', { userId, todoId })
         const s3 = new XAWS.S3({ signatureVersion: 'v4' })
         const urlExpiration = process.env.SIGNED_URL_EXPIRATION
-        const bucketName = process.env.ATTACHMENTS_S3_BUCKET
+        const bucketName = process.env.ATTACHMENT_S3_BUCKET
 
         const uploadUrl = s3.getSignedUrl('putObject', {
             Bucket: bucketName,
             Key: todoId,
-            Expires: urlExpiration
+            Expires: parseInt(urlExpiration)
         })
 
         await this.updateTodoAttachmentUrl(userId, todoId, `https://${bucketName}.s3.amazonaws.com/${todoId}`)  
@@ -137,12 +137,12 @@ export class TodosAccess {
         logger.info('getUploadUrl', { userId, todoId })
         const s3 = new XAWS.S3({ signatureVersion: 'v4' })
         const urlExpiration = process.env.SIGNED_URL_EXPIRATION
-        const bucketName = process.env.ATTACHMENTS_S3_BUCKET
+        const bucketName = process.env.ATTACHMENT_S3_BUCKET
 
         const uploadUrl = s3.getSignedUrl('putObject', {
             Bucket: bucketName,
             Key: todoId,
-            Expires: urlExpiration
+            Expires: parseInt(urlExpiration)
         })
 
         return uploadUrl
