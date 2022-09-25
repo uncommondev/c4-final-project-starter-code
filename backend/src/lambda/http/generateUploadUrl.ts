@@ -22,7 +22,8 @@ export const handler = middy(
       statusCode: 200,
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Headers': 'Accept'
       },
       body: JSON.stringify({
         uploadUrl: url
@@ -35,6 +36,7 @@ handler
   .use(httpErrorHandler())
   .use(
     cors({
-      credentials: true
+      credentials: true,
+      origin: '*'
     })
   )
