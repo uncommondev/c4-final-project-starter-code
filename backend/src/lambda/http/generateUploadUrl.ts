@@ -37,6 +37,5 @@ handler
   .use(
     cors({
       credentials: true,
-      origin: '*'
     })
   )
